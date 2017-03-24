@@ -10,7 +10,7 @@ before_install:
          # Fix Mysql Port already in use
         - sed -i '/MYSQL_PORT=3306/c\MYSQL_PORT=3307' .env
         - mkdir app
-        - sed -i '/APPLICATION=..\/src/c\APPLICATION=./app' env-adtriba-console
+        - sed -i '/APPLICATION=..\//c\APPLICATION=./app' .env
         - docker-compose --version
 
 script:
