@@ -1,0 +1,18 @@
+sudo: required
+
+language: php # doesn't actually matter
+
+services:
+        - docker
+
+before_install:
+        - cp env-example .env
+         # Fix Mysql Port already in use
+        - sed -i '/MYSQL_PORT=3306/c\MYSQL_PORT=3307' .env
+        - mkdir app
+        - sed -i '/APPLICATION=..\/src/c\APPLICATION=./app' env-adtriba-console
+        - docker-compose --version
+
+script:
+        - docker-compose config -q # validate the config
+        - docker-compose up --build -d nginx mysql
